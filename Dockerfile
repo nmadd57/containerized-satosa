@@ -1,0 +1,12 @@
+FROM python:3.12-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends xmlsec1 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir satosa gunicorn
+
+WORKDIR /opt/satosa/etc
+
+EXPOSE 8000
+
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "--chdir", "/opt/satosa/etc", "satosa.wsgi:app"]
