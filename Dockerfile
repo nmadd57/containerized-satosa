@@ -3,7 +3,7 @@ FROM python:3.12-slim
 RUN apt-get update && apt-get install -y --no-install-recommends xmlsec1 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir satosa gunicorn
+RUN pip install --no-cache-dir "satosa[idpy_oidc_backend]" gunicorn
 
 WORKDIR /opt/satosa/etc
 
